@@ -5,42 +5,55 @@ using UnityEngine;
 public class CreateMagic : MonoBehaviour
 {
     int guess;
+    int minNumber = 1;
+    int maxNumber = 1000;
     // Start is called before the first frame update
     void Start()
     {
         //float health = 50.45f
         // bool 
-        int minNumber = 1;
-        int maxNumber = 1000;
-        int guess;
-        Debug.Log("Добро пожаловать.");
-        Debug.Log("Загадайте число.");
-        Debug.Log("Мин число : " + minNumber);
-  
-        Debug.Log("Макс чило: " + maxNumber);
+        
+        StartGame();
 
         guess = (minNumber + maxNumber) / 2;
         Debug.Log("Ваше число : " + guess + "?");
     }
+     void StartGame()
+    {
+        minNumber = 1;
+        maxNumber = 1000;
 
+        Debug.Log("Добро пожаловать.");
+        Debug.Log("Загадайте число.");
+        Debug.Log("Мин число : " + minNumber);
+        Debug.Log("Макс чило: " + maxNumber);
+    }
     // Update is called once per frame
     void Update()
     {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("Up Arrow press");
+            minNumber = guess;
+            UpdateGuess();
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
 
         {
-            Debug.Log("Down Arrow press");
+            maxNumber = guess;
+            UpdateGuess();
         }
 
         else if (Input.GetKeyDown(KeyCode.Return))
         {
+            UpdateGuess();
             Debug.Log("Я угадал! Ваше число : " + guess);
         }
     }
 
+    private void UpdateGuess()
+    {
+        guess = (minNumber + maxNumber) / 2;
+        Debug.Log("Ваше число: " + guess + "?");
+    }
 }
